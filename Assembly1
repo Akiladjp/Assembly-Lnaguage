@@ -1,0 +1,108 @@
+Exercise 07 : 
+.data
+
+string: .space 100
+
+
+
+input_String_One: .asciiz "String length : "
+
+input_String_Two: .asciiz "Enter the String : "
+
+output_String: .asciiz "Reversed String : "
+
+
+
+.text
+
+main:
+
+
+
+#print the input String one
+
+la $a0,input_String_One
+
+li $v0,4
+
+syscall
+
+
+
+#take the length
+
+li $v0,5
+
+syscall
+
+
+
+move $t0,$v0
+
+addi $t0,$t0,1
+
+
+
+#print the input string two
+
+la $a0,input_String_Two
+
+li $v0,4
+
+syscall
+
+
+
+li $v0,8
+
+la $a0,string
+
+move $a1,$t1
+
+syscall
+
+
+
+la $a0,output_String
+
+li $v0,4
+
+syscall
+
+
+
+addi $t1,$zero,-1
+
+
+
+start_loop:
+
+beq $t0,$t1,end_loop
+
+la $t2,string
+
+add $t2,$t2,$t0
+
+ 
+
+lb $a0,($t2)
+
+li $v0,11
+
+syscall
+
+ 
+
+addi $t0,$t0,-1
+
+j start_loop
+
+end_loop:
+
+
+
+#end the program
+
+li $v0,10
+
+syscall
